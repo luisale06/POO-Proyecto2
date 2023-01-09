@@ -50,7 +50,6 @@ public class MenuPrincipalGUI {
             public void actionPerformed(ActionEvent e) {
                 Server server = new Server();
                 btnCrearPartida.setEnabled(false);
-//                frame.dispose();
             }
         });
 
@@ -59,7 +58,6 @@ public class MenuPrincipalGUI {
             public void actionPerformed(ActionEvent e) {
                 Client client = new Client();
                 btnUnirsePartida.setEnabled(false);
-
             }
         });
 

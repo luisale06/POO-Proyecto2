@@ -1,5 +1,6 @@
 package configuracion;
 
+import configuracion.ciudades.ciudadesGUI;
 import org.example.Client;
 import org.example.MenuPrincipalGUI;
 import org.example.Server;
@@ -58,7 +59,8 @@ public class configuracionGUI {
         btnCiudades.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-
+                ciudadesGUI ventanaCiudades = new ciudadesGUI();
+                frame.dispose();
             }
         });
 
