@@ -36,7 +36,7 @@ public class Server implements Runnable {
         frame.setLocation(400, 200);
         frame.setVisible(true);
         frame.setResizable(false);
-        frame.setTitle("Jugador 2");
+        frame.setTitle("Jugador 1");
         frame.setLayout(null);
         frame.getContentPane().setBackground(Color.white);
         frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
