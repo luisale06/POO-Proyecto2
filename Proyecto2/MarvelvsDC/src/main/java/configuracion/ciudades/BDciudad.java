@@ -29,8 +29,8 @@ public class BDciudad {
         }
     }
 
-    public void guardarCiudad(String pais, String provincia, String ciudad, String escenario) {
-        ciudades.add(new Ciudad(pais, provincia, ciudad, escenario));
+    public void guardarCiudad(Ciudad ciudadNueva) {
+        ciudades.add(ciudadNueva);
         System.out.println(ciudades);
     }
 
@@ -46,6 +46,17 @@ public class BDciudad {
     public void restaurar() throws IOException{
         Gson gson = new Gson();
         this.ciudades = gson.fromJson(new FileReader("ciudades.json"), new TypeToken<List<Ciudad>>(){}.getType());
+    }
+
+    public boolean existeCiudad(Ciudad ciudadNueva) {
+        boolean flag = false;
+        for(Ciudad ciudad : ciudades) {
+            if(ciudadNueva.getPais().equals(ciudad.getPais()) && ciudadNueva.getProvincia().equals(ciudad.getProvincia()) && ciudadNueva.getCiudad().equals(ciudad.getCiudad()) && ciudadNueva.getEscenario().equals(ciudad.getEscenario())) {
+                flag = true;
+                break;
+            }
+        }
+        return flag;
     }
 
 }

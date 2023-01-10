@@ -1,0 +1,32 @@
+[
+  {
+    "pais": "a",
+    "provincia": "b",
+    "ciudad": "c",
+    "escenario": "Ciudad"
+  },
+  {
+    "pais": "a",
+    "provincia": "a",
+    "ciudad": "a",
+    "escenario": "Ciudad"
+  },
+  {
+    "pais": "a",
+    "provincia": "b",
+    "ciudad": "c",
+    "escenario": "Bosque"
+  },
+  {
+    "pais": "b",
+    "provincia": "b",
+    "ciudad": "b",
+    "escenario": "Ciudad"
+  },
+  {
+    "pais": "cc",
+    "provincia": "c",
+    "ciudad": "c",
+    "escenario": "Ciudad"
+  }
+]

@@ -110,19 +110,21 @@ public class agregarCiudadGUI {
             @Override
             public void actionPerformed(ActionEvent e) {
                 if (!txtPais.getText().equals("") && !txtProvincia.getText().equals("") && !txtCiudad.getText().equals("")) {
-                    ciudad.guardarCiudad(txtPais.getText(), txtProvincia.getText(), txtCiudad.getText(), String.valueOf(cbEscenario.getSelectedItem()));
+                    Ciudad ciudadNueva = new Ciudad(txtPais.getText(), txtProvincia.getText(), txtCiudad.getText(), String.valueOf(cbEscenario.getSelectedItem()));
 
-                    try {
-                        ciudad.guardar();
-                    } catch (IOException ex) {throw new RuntimeException(ex);}
+                    if (!ciudad.existeCiudad(ciudadNueva)) {
+                        ciudad.guardarCiudad(ciudadNueva);
 
-                    JOptionPane.showMessageDialog(null, "La ciudad se ha guardado con exito.", "Guardado Exitoso", JOptionPane.INFORMATION_MESSAGE);
+                        try {ciudad.guardar();} catch (IOException ex) {throw new RuntimeException(ex);}
 
-                    ciudadesGUI ventanaCiudades = new ciudadesGUI();
-                    frame.dispose();
-                }  else {
-                    JOptionPane.showMessageDialog(null, "INTENTE DE NUEVO.", "ERROR", 1);
-                }
+                        JOptionPane.showMessageDialog(null, "La ciudad se ha guardado con exito.", "Guardado Exitoso", JOptionPane.INFORMATION_MESSAGE);
+
+                        ciudadesGUI ventanaCiudades = new ciudadesGUI();
+                        frame.dispose();
+
+                    } else {JOptionPane.showMessageDialog(null, "Ya existe esa ciudad - INTENTE DE NUEVO.", "Ciudad Existente", 1);}
+
+                }  else {JOptionPane.showMessageDialog(null, "INTENTE DE NUEVO.", "ERROR", 1);}
             }
         });
     }

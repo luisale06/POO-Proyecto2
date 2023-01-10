@@ -65,7 +65,11 @@ public class ciudadesGUI {
         btnEditarCiudad.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+                try {
+                    editarCiudadGUI ventanaEditarCiudad = new editarCiudadGUI();
+                } catch (IOException ex) {throw new RuntimeException(ex);}
 
+                frame.dispose();
             }
         });
 
