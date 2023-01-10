@@ -20,4 +20,14 @@ public class Ciudad {
     public String getCiudad() {return ciudad;}
 
     public String getEscenario() {return escenario;}
+
+    @Override
+    public String toString() {
+        return "Ciudad{" +
+                "pais='" + pais + '\'' +
+                ", provincia='" + provincia + '\'' +
+                ", ciudad='" + ciudad + '\'' +
+                ", escenario='" + escenario + '\'' +
+                '}';
+    }
 }

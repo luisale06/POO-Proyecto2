@@ -7,6 +7,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.IOException;
 
 public class ciudadesGUI {
     // Frame
@@ -21,7 +22,7 @@ public class ciudadesGUI {
     public ciudadesGUI(){
         frame.setSize(550, 600);
         frame.setLocation(400, 200);
-        frame.setTitle("Configuracion");
+        frame.setTitle("Configuración Ciudades");
         frame.setVisible(true);
         frame.setResizable(false);
         frame.setLayout(null);
@@ -71,7 +72,11 @@ public class ciudadesGUI {
         btnAgregarCiudad.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+                try {
+                    agregarCiudadGUI ventanaAgregarCiudad = new agregarCiudadGUI();
+                } catch (IOException ex) {throw new RuntimeException(ex);}
 
+                frame.dispose();
             }
         });
 
