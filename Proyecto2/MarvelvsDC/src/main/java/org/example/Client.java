@@ -95,7 +95,7 @@ public class Client implements Runnable {
                     DataOutputStream exitflow = new DataOutputStream(snsocket.getOutputStream());
                     exitflow.writeUTF(nametxtfield.getText());
 
-                    esperando1.setText(nametxtfield.getText());
+                    esperando2.setText(nametxtfield.getText());
                     cantidadjugadores++;
 
                     if (cantidadjugadores == 2) {
@@ -141,7 +141,7 @@ public class Client implements Runnable {
                 DataInputStream entryflow = new DataInputStream(sckt.getInputStream());
                 String res = entryflow.readUTF();
 
-                esperando2.setText(res);
+                esperando1.setText(res);
                 cantidadjugadores++;
 
                 if (cantidadjugadores == 2) {

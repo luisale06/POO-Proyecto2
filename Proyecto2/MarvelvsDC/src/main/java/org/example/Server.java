@@ -96,7 +96,7 @@ public class Server implements Runnable {
                     DataOutputStream exitflow = new DataOutputStream(snsocket.getOutputStream());
                     exitflow.writeUTF(nameJ2);
 
-                    esperando2.setText(nametxtfield.getText());
+                    esperando1.setText(nametxtfield.getText());
                     cantidadjugadores++;
 
                     if (cantidadjugadores == 2){
@@ -144,7 +144,7 @@ public class Server implements Runnable {
                 DataInputStream entryflow = new DataInputStream(sckt.getInputStream());
                 String res = entryflow.readUTF();
 
-                esperando1.setText(res);
+                esperando2.setText(res);
                 cantidadjugadores++;
 
                 if (cantidadjugadores == 2){
