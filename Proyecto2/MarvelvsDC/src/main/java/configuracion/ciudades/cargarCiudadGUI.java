@@ -6,7 +6,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.IOException;
 
-public class agregarCiudadGUI {
+public class cargarCiudadGUI {
     // Frame
     JFrame frame = new JFrame();
 
@@ -20,29 +20,30 @@ public class agregarCiudadGUI {
     JTextField txtPais = new JTextField();
     JTextField txtProvincia = new JTextField();
     JTextField txtCiudad = new JTextField();
+    JTextField txtEscenario = new JTextField();
 
     // Combobox
-    String[] tiposEscenario= {"Ciudad", "Bosque", "Montaña", "Desierto"};
-    JComboBox cmbEscenario = new JComboBox(tiposEscenario);
+    JComboBox<Ciudad> cmbCiudades = new JComboBox<>();
 
     // Buttons
-    JButton btnAgregarCiudad = new JButton("Agregar Ciudad");
+    JButton btnRegresar = new JButton("Regresar");
 
     // BDciudades
     BDciudad ciudad = new BDciudad();
+    Ciudad ciudadSeleccionada;
 
-    agregarCiudadGUI() throws IOException {
+    cargarCiudadGUI() throws IOException {
         frame.setSize(550,600);
         frame.setLocation(400,200);
         frame.setTitle("Agregar Ciudad");
         frame.setVisible(true);
         frame.setResizable(false);
         frame.setLayout(null);
-        frame.getContentPane().
-
-        setBackground(Color.white);
+        frame.getContentPane().setBackground(Color.white);
         frame.setLocationRelativeTo(null);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+
+        ciudad.restaurar();
 
         // Labels
         lblPais.setFont(new Font("Segoe UI", Font.PLAIN, 20));
@@ -77,54 +78,68 @@ public class agregarCiudadGUI {
         // TextFields
         txtPais.setFont(new Font("Segoe UI", Font.PLAIN, 16));
         txtPais.setBounds(252, 185, 190, 25);
+        txtPais.setEnabled(false);
+        txtProvincia.setEnabled(false);
+        txtPais.setDisabledTextColor(Color.BLACK);
 
         txtProvincia.setFont(new Font("Segoe UI", Font.PLAIN, 16));
         txtProvincia.setBounds(252, 237, 190, 25);
+        txtProvincia.setEnabled(false);
+        txtProvincia.setDisabledTextColor(Color.BLACK);
 
         txtCiudad.setFont(new Font("Segoe UI", Font.PLAIN, 16));
         txtCiudad.setBounds(252, 289, 190, 25);
+        txtCiudad.setEnabled(false);
+        txtCiudad.setDisabledTextColor(Color.BLACK);
+
+        txtEscenario.setFont(new Font("Segoe UI", Font.PLAIN, 16));
+        txtEscenario.setBounds(252, 341, 190, 25);
+        txtEscenario.setEnabled(false);
+        txtEscenario.setDisabledTextColor(Color.BLACK);
 
         frame.add(txtPais);
         frame.add(txtProvincia);
         frame.add(txtCiudad);
+        frame.add(txtEscenario);
 
         // ComboBox
-        cmbEscenario.setFont(new Font("Segoe UI", Font.PLAIN, 16));
-        cmbEscenario.setBounds(252, 341, 190, 25);
-        cmbEscenario.setBackground(Color.white);
-        ((JLabel) cmbEscenario.getRenderer()).setHorizontalAlignment(JLabel.CENTER);
+        cmbCiudades.setModel(new DefaultComboBoxModel(ciudad.getCiudades().toArray()));
+        cmbCiudades.setFont(new Font("Segoe UI", Font.PLAIN, 16));
+        cmbCiudades.setBounds(43, 133, 442, 25);
+        cmbCiudades.setBackground(Color.white);
+        ((JLabel) cmbCiudades.getRenderer()).setHorizontalAlignment(JLabel.CENTER);
 
-        frame.add(cmbEscenario);
+        frame.add(cmbCiudades);
 
         // Button
-        btnAgregarCiudad.setBounds(170, 460, 190, 60);
-        btnAgregarCiudad.setBackground(Color.lightGray);
-        btnAgregarCiudad.setForeground(Color.darkGray);
-        btnAgregarCiudad.setFont(new Font("Segoe UI", Font.BOLD, 20));
+        btnRegresar.setBounds(170, 460, 190, 60);
+        btnRegresar.setBackground(Color.lightGray);
+        btnRegresar.setForeground(Color.darkGray);
+        btnRegresar.setFont(new Font("Segoe UI", Font.BOLD, 20));
 
-        frame.add(btnAgregarCiudad);
+        frame.add(btnRegresar);
 
-        ciudad.restaurar();
-
-        btnAgregarCiudad.addActionListener(new ActionListener() {
+        cmbCiudades.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                if (!txtPais.getText().equals("") && !txtProvincia.getText().equals("") && !txtCiudad.getText().equals("")) {
-                    Ciudad ciudadNueva = new Ciudad(txtPais.getText(), txtProvincia.getText(), txtCiudad.getText(), String.valueOf(cmbEscenario.getSelectedItem()));
+                ciudadSeleccionada = (Ciudad) cmbCiudades.getSelectedItem();
 
-                    if (!ciudad.existeCiudad(ciudadNueva)) {
-                        ciudad.addCiudad(ciudadNueva);
+                if (ciudadSeleccionada != null) {
+                    txtPais.setText(ciudadSeleccionada.getPais());
+                    txtProvincia.setText(ciudadSeleccionada.getProvincia());
+                    txtCiudad.setText(ciudadSeleccionada.getCiudad());
+                    txtEscenario.setText(ciudadSeleccionada.getEscenario());
 
-                        try {ciudad.guardar();} catch (IOException ex) {throw new RuntimeException(ex);}
+                } else {JOptionPane.showMessageDialog(null, "INTENTE DE NUEVO.", "ERROR", JOptionPane.ERROR_MESSAGE);}
+            }
+        });
 
-                        JOptionPane.showMessageDialog(null, "La ciudad se ha guardado con exito.", "Guardado Exitoso", JOptionPane.INFORMATION_MESSAGE);
+        btnRegresar.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                ciudadesGUI ventanaCiudad = new ciudadesGUI();
 
-                        ciudadesGUI ventanaCiudades = new ciudadesGUI();
-                        frame.dispose();
-
-                    } else {JOptionPane.showMessageDialog(null, "Ya existe esa ciudad - INTENTE DE NUEVO.", "Ciudad Existente", JOptionPane.INFORMATION_MESSAGE);}
-
-                }  else {JOptionPane.showMessageDialog(null, "INTENTE DE NUEVO.", "ERROR", JOptionPane.ERROR_MESSAGE);}
+                frame.dispose();
             }
         });
     }

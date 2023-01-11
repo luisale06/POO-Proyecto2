@@ -5,7 +5,6 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.IOException;
-import java.util.ArrayList;
 
 public class editarCiudadGUI {
     // Frame
@@ -28,11 +27,11 @@ public class editarCiudadGUI {
     JComboBox<Ciudad> cmbCiudades = new JComboBox<>();
 
     // Buttons
-    JButton btnAgregarCiudad = new JButton("Editar Ciudad");
+    JButton btnEditarCiudad = new JButton("Editar Ciudad");
 
     // BDciudades
     BDciudad ciudad = new BDciudad();
-//    ArrayList<Ciudad> ciudades = ciudad.getCiudades();
+    Ciudad ciudadSeleccionada;
 
     editarCiudadGUI() throws IOException {
         frame.setSize(550,600);
@@ -96,7 +95,7 @@ public class editarCiudadGUI {
         cmbEscenario.setBackground(Color.white);
         ((JLabel) cmbEscenario.getRenderer()).setHorizontalAlignment(JLabel.CENTER);
 
-        for (Ciudad c : ciudad.getCiudades()) {cmbCiudades.addItem(c);}
+        cmbCiudades.setModel(new DefaultComboBoxModel(ciudad.getCiudades().toArray()));
         cmbCiudades.setFont(new Font("Segoe UI", Font.PLAIN, 16));
         cmbCiudades.setBounds(43, 133, 442, 25);
         cmbCiudades.setBackground(Color.white);
@@ -106,42 +105,53 @@ public class editarCiudadGUI {
         frame.add(cmbCiudades);
 
         // Button
-        btnAgregarCiudad.setBounds(170, 460, 190, 60);
-        btnAgregarCiudad.setBackground(Color.lightGray);
-        btnAgregarCiudad.setForeground(Color.darkGray);
-        btnAgregarCiudad.setFont(new Font("Segoe UI", Font.BOLD, 20));
+        btnEditarCiudad.setBounds(170, 460, 190, 60);
+        btnEditarCiudad.setBackground(Color.lightGray);
+        btnEditarCiudad.setForeground(Color.darkGray);
+        btnEditarCiudad.setFont(new Font("Segoe UI", Font.BOLD, 20));
 
-        frame.add(btnAgregarCiudad);
-
-//        ciudad.restaurar();
+        frame.add(btnEditarCiudad);
 
         cmbCiudades.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                System.out.println("Seleccionado: "+cmbCiudades.getSelectedItem());
+                ciudadSeleccionada = (Ciudad) cmbCiudades.getSelectedItem();
 
+                if (ciudadSeleccionada != null) {
+                    txtPais.setText(ciudadSeleccionada.getPais());
+                    txtProvincia.setText(ciudadSeleccionada.getProvincia());
+                    txtCiudad.setText(ciudadSeleccionada.getCiudad());
+                    cmbEscenario.setSelectedItem(ciudadSeleccionada.getEscenario());
+
+                } else {JOptionPane.showMessageDialog(null, "INTENTE DE NUEVO.", "ERROR", JOptionPane.ERROR_MESSAGE);}
             }
         });
 
-        btnAgregarCiudad.addActionListener(new ActionListener() {
+        btnEditarCiudad.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 if (!txtPais.getText().equals("") && !txtProvincia.getText().equals("") && !txtCiudad.getText().equals("")) {
                     Ciudad ciudadNueva = new Ciudad(txtPais.getText(), txtProvincia.getText(), txtCiudad.getText(), String.valueOf(cmbEscenario.getSelectedItem()));
 
                     if (!ciudad.existeCiudad(ciudadNueva)) {
-                        ciudad.addCiudad(ciudadNueva);
+                        ciudadSeleccionada.setPais(txtPais.getText());
+                        ciudadSeleccionada.setProvincia(txtProvincia.getText());
+                        ciudadSeleccionada.setCiudad(txtCiudad.getText());
+                        ciudadSeleccionada.setEscenario(String.valueOf(cmbEscenario.getSelectedItem()));
+
+                        int index = ciudad.getCiudades().indexOf(ciudadSeleccionada);
+                        ciudad.getCiudades().set(index, ciudadSeleccionada);
 
                         try {ciudad.guardar();} catch (IOException ex) {throw new RuntimeException(ex);}
 
-                        JOptionPane.showMessageDialog(null, "La ciudad se ha guardado con exito.", "Guardado Exitoso", JOptionPane.INFORMATION_MESSAGE);
+                        JOptionPane.showMessageDialog(null, "La ciudad se ha editado con exito.", "Guardado Exitoso", JOptionPane.INFORMATION_MESSAGE);
 
                         ciudadesGUI ventanaCiudades = new ciudadesGUI();
                         frame.dispose();
 
                     } else {JOptionPane.showMessageDialog(null, "Ya existe esa ciudad - INTENTE DE NUEVO.", "Ciudad Existente", JOptionPane.INFORMATION_MESSAGE);}
 
-                }  else {JOptionPane.showMessageDialog(null, "INTENTE DE NUEVO.", "ERROR", JOptionPane.ERROR_MESSAGE);}
+                } else {JOptionPane.showMessageDialog(null, "INTENTE DE NUEVO.", "ERROR", JOptionPane.ERROR_MESSAGE);}
             }
         });
     }

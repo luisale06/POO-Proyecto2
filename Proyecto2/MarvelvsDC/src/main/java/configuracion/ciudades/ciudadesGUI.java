@@ -58,6 +58,11 @@ public class ciudadesGUI {
         btnCargarCiudad.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+                try {
+                    cargarCiudadGUI ventanaCargarCiudad = new cargarCiudadGUI();
+                } catch (IOException ex) {throw new RuntimeException(ex);}
+
+                frame.dispose();
 
             }
         });

@@ -62,4 +62,5 @@ public class BDciudad {
     public ArrayList<Ciudad> getCiudades() {
         return ciudades;
     }
+
 }

@@ -21,6 +21,14 @@ public class Ciudad {
 
     public String getEscenario() {return escenario;}
 
+    public void setPais(String pais) {this.pais = pais;}
+
+    public void setProvincia(String provincia) {this.provincia = provincia;}
+
+    public void setCiudad(String ciudad) {this.ciudad = ciudad;}
+
+    public void setEscenario(String escenario) {this.escenario = escenario;}
+
     @Override
     public String toString() {
         return pais+" / "+provincia+" / "+ciudad+" / "+escenario;
