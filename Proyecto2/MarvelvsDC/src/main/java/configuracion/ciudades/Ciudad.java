@@ -23,11 +23,6 @@ public class Ciudad {
 
     @Override
     public String toString() {
-        return "Ciudad{" +
-                "pais='" + pais + '\'' +
-                ", provincia='" + provincia + '\'' +
-                ", ciudad='" + ciudad + '\'' +
-                ", escenario='" + escenario + '\'' +
-                '}';
+        return pais+" / "+provincia+" / "+ciudad+" / "+escenario;
     }
 }

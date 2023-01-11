@@ -29,7 +29,7 @@ public class BDciudad {
         }
     }
 
-    public void guardarCiudad(Ciudad ciudadNueva) {
+    public void addCiudad(Ciudad ciudadNueva) {
         ciudades.add(ciudadNueva);
         System.out.println(ciudades);
     }
@@ -38,14 +38,14 @@ public class BDciudad {
         Gson gson = new GsonBuilder().setPrettyPrinting().create();
         String json = gson.toJson(this.ciudades);
 
-        FileWriter writer = new FileWriter("ciudades.json");
+        FileWriter writer = new FileWriter(filepath);
         writer.write(json);
         writer.close();
     }
 
     public void restaurar() throws IOException{
         Gson gson = new Gson();
-        this.ciudades = gson.fromJson(new FileReader("ciudades.json"), new TypeToken<List<Ciudad>>(){}.getType());
+        this.ciudades = gson.fromJson(new FileReader(filepath), new TypeToken<List<Ciudad>>(){}.getType());
     }
 
     public boolean existeCiudad(Ciudad ciudadNueva) {
@@ -59,4 +59,7 @@ public class BDciudad {
         return flag;
     }
 
+    public ArrayList<Ciudad> getCiudades() {
+        return ciudades;
+    }
 }

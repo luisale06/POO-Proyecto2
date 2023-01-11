@@ -1,11 +1,13 @@
 package org.example;
 
+import configuracion.ciudades.BDciudad;
 import configuracion.configuracionGUI;
 
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.IOException;
 
 public class MenuPrincipalGUI {
     // Frame
@@ -15,6 +17,7 @@ public class MenuPrincipalGUI {
     JButton btnCrearPartida = new JButton("CREAR PARTIDA");
     JButton btnUnirsePartida = new JButton("UNIRSE PARTIDA");
     JButton btnConfiguracion = new JButton("CONFIGURACION");
+    BDciudad ciudad = new BDciudad();
 
     public MenuPrincipalGUI(){
         frame.setSize(550, 600);
@@ -45,6 +48,8 @@ public class MenuPrincipalGUI {
         frame.add(btnCrearPartida);
         frame.add(btnUnirsePartida);
         frame.add(btnConfiguracion);
+
+//        try {ciudad.restaurar();} catch (IOException e) {throw new RuntimeException(e);}
 
         btnCrearPartida.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
