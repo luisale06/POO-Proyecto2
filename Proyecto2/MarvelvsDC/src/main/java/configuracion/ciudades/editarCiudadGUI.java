@@ -27,6 +27,7 @@ public class editarCiudadGUI {
     JComboBox<Ciudad> cmbCiudades = new JComboBox<>();
 
     // Buttons
+    JButton btnRegresar = new JButton("Regresar");
     JButton btnEditarCiudad = new JButton("Editar Ciudad");
 
     // BDciudades
@@ -105,11 +106,17 @@ public class editarCiudadGUI {
         frame.add(cmbCiudades);
 
         // Button
-        btnEditarCiudad.setBounds(170, 460, 190, 60);
+        btnRegresar.setBounds(75, 460, 190, 60);
+        btnRegresar.setBackground(Color.lightGray);
+        btnRegresar.setForeground(Color.darkGray);
+        btnRegresar.setFont(new Font("Segoe UI", Font.BOLD, 20));
+
+        btnEditarCiudad.setBounds(275, 460, 190, 60);
         btnEditarCiudad.setBackground(Color.lightGray);
         btnEditarCiudad.setForeground(Color.darkGray);
         btnEditarCiudad.setFont(new Font("Segoe UI", Font.BOLD, 20));
 
+        frame.add(btnRegresar);
         frame.add(btnEditarCiudad);
 
         cmbCiudades.addActionListener(new ActionListener() {
@@ -124,6 +131,14 @@ public class editarCiudadGUI {
                     cmbEscenario.setSelectedItem(ciudadSeleccionada.getEscenario());
 
                 } else {JOptionPane.showMessageDialog(null, "INTENTE DE NUEVO.", "ERROR", JOptionPane.ERROR_MESSAGE);}
+            }
+        });
+
+        btnRegresar.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                ciudadesGUI ventanaCiudades = new ciudadesGUI();
+                frame.dispose();
             }
         });
 

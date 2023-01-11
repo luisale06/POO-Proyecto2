@@ -27,6 +27,7 @@ public class agregarCiudadGUI {
 
     // Buttons
     JButton btnAgregarCiudad = new JButton("Agregar Ciudad");
+    JButton btnRegresar = new JButton("Regresar");
 
     // BDciudades
     BDciudad ciudad = new BDciudad();
@@ -38,35 +39,35 @@ public class agregarCiudadGUI {
         frame.setVisible(true);
         frame.setResizable(false);
         frame.setLayout(null);
-        frame.getContentPane().
-
-        setBackground(Color.white);
+        frame.getContentPane().setBackground(Color.white);
         frame.setLocationRelativeTo(null);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+
+        ciudad.restaurar();
 
         // Labels
         lblPais.setFont(new Font("Segoe UI", Font.PLAIN, 20));
         lblPais.setBackground(Color.white);
         lblPais.setOpaque(true);
-        lblPais.setBounds(43, 185, 190, 25);
+        lblPais.setBounds(43, 165, 190, 25);
         lblPais.setHorizontalAlignment(JLabel.RIGHT);
 
         lblProvincia.setFont(new Font("Segoe UI", Font.PLAIN, 20));
         lblProvincia.setBackground(Color.white);
         lblProvincia.setOpaque(true);
-        lblProvincia.setBounds(43, 237, 190, 25);
+        lblProvincia.setBounds(43, 217, 190, 25);
         lblProvincia.setHorizontalAlignment(JLabel.RIGHT);
 
         lblCiudad.setFont(new Font("Segoe UI", Font.PLAIN, 20));
         lblCiudad.setBackground(Color.white);
         lblCiudad.setOpaque(true);
-        lblCiudad.setBounds(43, 289, 190, 25);
+        lblCiudad.setBounds(43, 269, 190, 25);
         lblCiudad.setHorizontalAlignment(JLabel.RIGHT);
 
         lblEscenario.setFont(new Font("Segoe UI", Font.PLAIN, 20));
         lblEscenario.setBackground(Color.white);
         lblEscenario.setOpaque(true);
-        lblEscenario.setBounds(43, 341, 190, 25);
+        lblEscenario.setBounds(43, 321, 190, 25);
         lblEscenario.setHorizontalAlignment(JLabel.RIGHT);
 
         frame.add(lblPais);
@@ -76,13 +77,13 @@ public class agregarCiudadGUI {
 
         // TextFields
         txtPais.setFont(new Font("Segoe UI", Font.PLAIN, 16));
-        txtPais.setBounds(252, 185, 190, 25);
+        txtPais.setBounds(252, 165, 190, 25);
 
         txtProvincia.setFont(new Font("Segoe UI", Font.PLAIN, 16));
-        txtProvincia.setBounds(252, 237, 190, 25);
+        txtProvincia.setBounds(252, 217, 190, 25);
 
         txtCiudad.setFont(new Font("Segoe UI", Font.PLAIN, 16));
-        txtCiudad.setBounds(252, 289, 190, 25);
+        txtCiudad.setBounds(252, 269, 190, 25);
 
         frame.add(txtPais);
         frame.add(txtProvincia);
@@ -90,21 +91,33 @@ public class agregarCiudadGUI {
 
         // ComboBox
         cmbEscenario.setFont(new Font("Segoe UI", Font.PLAIN, 16));
-        cmbEscenario.setBounds(252, 341, 190, 25);
+        cmbEscenario.setBounds(252, 321, 190, 25);
         cmbEscenario.setBackground(Color.white);
         ((JLabel) cmbEscenario.getRenderer()).setHorizontalAlignment(JLabel.CENTER);
 
         frame.add(cmbEscenario);
 
         // Button
-        btnAgregarCiudad.setBounds(170, 460, 190, 60);
+        btnRegresar.setBounds(75, 460, 190, 60);
+        btnRegresar.setBackground(Color.lightGray);
+        btnRegresar.setForeground(Color.darkGray);
+        btnRegresar.setFont(new Font("Segoe UI", Font.BOLD, 20));
+
+        btnAgregarCiudad.setBounds(275, 460, 190, 60);
         btnAgregarCiudad.setBackground(Color.lightGray);
         btnAgregarCiudad.setForeground(Color.darkGray);
         btnAgregarCiudad.setFont(new Font("Segoe UI", Font.BOLD, 20));
 
+        frame.add(btnRegresar);
         frame.add(btnAgregarCiudad);
 
-        ciudad.restaurar();
+        btnRegresar.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                ciudadesGUI ventanaCiudades = new ciudadesGUI();
+                frame.dispose();
+            }
+        });
 
         btnAgregarCiudad.addActionListener(new ActionListener() {
             @Override
