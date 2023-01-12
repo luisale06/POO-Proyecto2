@@ -1,5 +1,9 @@
 package configuracion.ciudades;
 
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+import com.google.gson.reflect.TypeToken;
+
 import java.io.File;
 import java.io.FileReader;
 import java.io.FileWriter;
@@ -7,9 +11,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
-import com.google.gson.reflect.TypeToken;
+
 
 public class BDciudad {
     String filepath = "ciudades.json";

@@ -1,6 +1,7 @@
 package configuracion;
 
 import configuracion.ciudades.ciudadesGUI;
+import configuracion.personajes.personajesGUI;
 import org.example.Client;
 import org.example.MenuPrincipalGUI;
 import org.example.Server;
@@ -67,7 +68,8 @@ public class configuracionGUI {
         btnPersonajes.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-
+                personajesGUI ventanaPersonajesGUI = new personajesGUI();
+                frame.dispose();
             }
         });
 
