@@ -9,6 +9,7 @@ import javax.swing.event.ChangeListener;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.Calendar;
 
 public class personajesGUI {
 
@@ -31,10 +32,7 @@ public class personajesGUI {
     JLabel lblFoto = new JLabel("Foto");
 
     // TextFields
-    JTextField txtTipo = new JTextField();
     JTextField txtPseudonimo = new JTextField();
-    JTextField txtRaza = new JTextField();
-    JTextField txtFranquicia = new JTextField();
     JTextField txtFotoTraje = new JTextField();
     JTextField txtFuerza = new JTextField();
     JTextField txtVelocidad = new JTextField();
@@ -52,9 +50,11 @@ public class personajesGUI {
     JComboBox cmbRaza = new JComboBox(razas);
     String[] franquicias = {"Marvel", "DC", "Ninguna de las anteriores"};
     JComboBox cmbFranquicia = new JComboBox(franquicias);
-
-    // DateChooser
-    JDateChooser dcFechaNacimiento = new JDateChooser();
+    String[] dias = {"1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23", "24", "25", "26", "27", "28", "29", "30", "31"};
+    JComboBox cmbDias = new JComboBox(dias);
+    String[] meses = {"1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12"};
+    JComboBox cmbMeses = new JComboBox(meses);
+    JComboBox cmbAnios = new JComboBox();
 
     // Slider
     JSlider sdFuerza = new JSlider(0, 100, 0);
@@ -69,6 +69,12 @@ public class personajesGUI {
     JButton btnFoto = new JButton("...");
     JButton btnAgregarPersonaje = new JButton("Agregar Personaje");
 
+    // Bases de Datos de Clases
+    BDheroe heroe = new BDheroe();
+    BDantiheroe antiheroe = new BDantiheroe();
+    BDvillano villano = new BDvillano();
+
+    // Variables
     Integer ajusteX = 60;
     Integer x1 = 155 - ajusteX;
     Integer x2 = 405 - ajusteX;
@@ -244,7 +250,6 @@ public class personajesGUI {
         frame.add(txtInteligencia);
         frame.add(txtEconomia);
         frame.add(txtNombreCompleto);
-        frame.add(txtFechaNacimiento);
         frame.add(txtPaisResidencia);
         frame.add(txtFoto);
 
@@ -264,9 +269,33 @@ public class personajesGUI {
         cmbFranquicia.setBackground(Color.white);
         ((JLabel) cmbFranquicia.getRenderer()).setHorizontalAlignment(JLabel.CENTER);
 
+        cmbDias.setFont(new Font("Segoe UI", Font.PLAIN, 16));
+        cmbDias.setBounds(x2, 560 - ajusteY, 65, 25);
+        cmbDias.setBackground(Color.white);
+        ((JLabel) cmbDias.getRenderer()).setHorizontalAlignment(JLabel.CENTER);
+        cmbDias.setEnabled(false);
+
+        cmbMeses.setFont(new Font("Segoe UI", Font.PLAIN, 16));
+        cmbMeses.setBounds(427, 560 - ajusteY, 65, 25);
+        cmbMeses.setBackground(Color.white);
+        ((JLabel) cmbMeses.getRenderer()).setHorizontalAlignment(JLabel.CENTER);
+        cmbMeses.setEnabled(false);
+
+        cmbAnios.setFont(new Font("Segoe UI", Font.PLAIN, 16));
+        cmbAnios.setBounds(x3, 560 - ajusteY, 65, 25);
+        cmbAnios.setBackground(Color.white);
+        ((JLabel) cmbAnios.getRenderer()).setHorizontalAlignment(JLabel.CENTER);
+        for (int i = 1950; i < 2051; i++)
+            cmbAnios.addItem(i);
+        cmbAnios.setEnabled(false);
+        cmbAnios.setSelectedItem(2023);
+
         frame.add(cmbTipo);
         frame.add(cmbRaza);
         frame.add(cmbFranquicia);
+        frame.add(cmbDias);
+        frame.add(cmbMeses);
+        frame.add(cmbAnios);
 
         // Slider
         sdFuerza.setBounds(x2, 310 - ajusteY, 160, 25);
@@ -356,11 +385,18 @@ public class personajesGUI {
                     btnFechaNacimiento.setEnabled(true);
                     txtPaisResidencia.setEditable(true);
                     btnFoto.setEnabled(true);
+                    cmbDias.setEnabled(true);
+                    cmbMeses.setEnabled(true);
+                    cmbAnios.setEnabled(true);
                 } else {
                     txtNombreCompleto.setEditable(false);
                     btnFechaNacimiento.setEnabled(false);
                     txtPaisResidencia.setEditable(false);
                     btnFoto.setEnabled(false);
+                    btnFoto.setEnabled(false);
+                    cmbDias.setEnabled(false);
+                    cmbMeses.setEnabled(false);
+                    cmbAnios.setEnabled(false);
                 }
             }
         });
@@ -372,5 +408,11 @@ public class personajesGUI {
                 frame.dispose();
             }
         });
+
+
+    }
+
+    private formCompleto() {
+
     }
 }

@@ -16,7 +16,6 @@ import java.util.List;
 public class BDciudad {
     String filepath = "ciudades.json";
     ArrayList<Ciudad> ciudades = new ArrayList<>();
-//    JSONArray jsonArray = new JSONArray();
 
     public BDciudad() {
         // Crea una instancia de File con la ruta del archivo

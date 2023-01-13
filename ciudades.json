@@ -1,0 +1,20 @@
+[
+  {
+    "pais": "Costa Rica",
+    "provincia": "Guanacaste",
+    "ciudad": "Liberia",
+    "escenario": "Ciudad"
+  },
+  {
+    "pais": "Costa Rica",
+    "provincia": "Guanacaste",
+    "ciudad": "Guayabo",
+    "escenario": "Desierto"
+  },
+  {
+    "pais": "Nicaragua",
+    "provincia": "Managua",
+    "ciudad": "Managuita",
+    "escenario": "Bosque"
+  }
+]
