@@ -1,1 +1,14 @@
-[]
+[
+  {
+    "tipo": "Villano",
+    "pseudonimo": "AFO",
+    "raza": "Mutante / Meta humano",
+    "franquicia": "Ninguna de las anteriores",
+    "fotoTraje": "C:\\Users\\fabia\\Downloads\\Trabajo en clase - Prestamo Biblioteca.png",
+    "fuerza": 80.0,
+    "velocidad": 50.0,
+    "inteligencia": 100.0,
+    "economia": 100.0,
+    "poderTotal": 0.4
+  }
+]
