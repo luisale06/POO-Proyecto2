@@ -75,4 +75,20 @@ public class Personaje {
     public Double getPoderTotal() {return poderTotal;}
 
     public void setPoderTotal(Double poderTotal) {this.poderTotal = poderTotal;}
+
+    @Override
+    public String toString() {
+        return "Personaje{" +
+                "tipo='" + tipo + '\'' +
+                ", pseudonimo='" + pseudonimo + '\'' +
+                ", raza='" + raza + '\'' +
+                ", franquicia='" + franquicia + '\'' +
+                ", fotoTraje='" + fotoTraje + '\'' +
+                ", fuerza=" + fuerza +
+                ", velocidad=" + velocidad +
+                ", inteligencia=" + inteligencia +
+                ", economia=" + economia +
+                ", poderTotal=" + poderTotal +
+                '}';
+    }
 }
