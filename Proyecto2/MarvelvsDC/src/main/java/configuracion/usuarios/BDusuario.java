@@ -40,6 +40,17 @@ public class BDusuario {
         this.usuarios = gson.fromJson(new FileReader(filepath), new TypeToken<List<usuario>>(){}.getType());
     }
 
+    public boolean existeUsuario(usuario usuarioNuevo) {
+        boolean flag = false;
+        for(usuario usuario : usuarios) {
+            if(usuarioNuevo.getNombre().equals(usuario.getNombre()) && usuarioNuevo.getApellidos().equals(usuario.getApellidos()) && usuarioNuevo.getUsername().equals(usuario.getUsername()) && usuarioNuevo.getCorreo().equals(usuario.getCorreo()) && usuarioNuevo.getContraseña().equals(usuario.getContraseña())) {
+                flag = true;
+                break;
+            }
+        }
+        return flag;
+    }
+
     public ArrayList<usuario> getUsuarios() {
         return usuarios;
     }
