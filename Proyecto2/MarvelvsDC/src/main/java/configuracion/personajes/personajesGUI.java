@@ -329,7 +329,6 @@ public class personajesGUI extends Component {
         btnFoto.setBackground(Color.lightGray);
         btnFoto.setForeground(Color.darkGray);
         btnFoto.setFont(new Font("Segoe UI", Font.BOLD, 20));
-        btnFoto.setEnabled(false);
 
         btnRegresar.setBounds(170, 715 - ajusteY, 210, 60);
         btnRegresar.setBackground(Color.lightGray);
