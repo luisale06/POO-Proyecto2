@@ -22,7 +22,7 @@ public class BDvillano {
             try {guardar();} catch (IOException e) {throw new RuntimeException(e);}}
     }
 
-    public void addVillano(Antiheroe villanoNuevo) {
+    public void addVillano(Villano villanoNuevo) {
         villanos.add(villanoNuevo);
     }
 

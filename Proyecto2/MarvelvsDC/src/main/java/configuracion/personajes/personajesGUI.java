@@ -1,6 +1,5 @@
 package configuracion.personajes;
 
-import com.toedter.calendar.JDateChooser;
 import configuracion.configuracionGUI;
 
 import javax.swing.*;
@@ -9,9 +8,13 @@ import javax.swing.event.ChangeListener;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.Calendar;
+import java.io.IOException;
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
-public class personajesGUI {
+public class personajesGUI extends Component {
 
     // Frame
     JFrame frame = new JFrame();
@@ -55,6 +58,10 @@ public class personajesGUI {
     String[] meses = {"1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12"};
     JComboBox cmbMeses = new JComboBox(meses);
     JComboBox cmbAnios = new JComboBox();
+
+    // FileChooser
+    JFileChooser chFotoTraje = new JFileChooser();
+    JFileChooser chFoto = new JFileChooser();
 
     // Slider
     JSlider sdFuerza = new JSlider(0, 100, 0);
@@ -224,18 +231,14 @@ public class personajesGUI {
 
         txtNombreCompleto.setFont(new Font("Segoe UI", Font.PLAIN, 16));
         txtNombreCompleto.setBounds(x2, 510 - ajusteY, 230, 25);
-        txtNombreCompleto.setEditable(false);
         txtNombreCompleto.setBackground(Color.WHITE);
 
         txtFechaNacimiento.setFont(new Font("Segoe UI", Font.PLAIN, 16));
         txtFechaNacimiento.setBounds(x2, 560 - ajusteY, 160, 25);
-        txtFechaNacimiento.setEditable(false);
         txtFechaNacimiento.setBackground(Color.WHITE);
-        txtFechaNacimiento.setEditable(false);
 
         txtPaisResidencia.setFont(new Font("Segoe UI", Font.PLAIN, 16));
         txtPaisResidencia.setBounds(x2, 610 - ajusteY, 230, 25);
-        txtPaisResidencia.setEditable(false);
         txtPaisResidencia.setBackground(Color.WHITE);
 
         txtFoto.setFont(new Font("Segoe UI", Font.PLAIN, 16));
@@ -273,13 +276,11 @@ public class personajesGUI {
         cmbDias.setBounds(x2, 560 - ajusteY, 65, 25);
         cmbDias.setBackground(Color.white);
         ((JLabel) cmbDias.getRenderer()).setHorizontalAlignment(JLabel.CENTER);
-        cmbDias.setEnabled(false);
 
         cmbMeses.setFont(new Font("Segoe UI", Font.PLAIN, 16));
         cmbMeses.setBounds(427, 560 - ajusteY, 65, 25);
         cmbMeses.setBackground(Color.white);
         ((JLabel) cmbMeses.getRenderer()).setHorizontalAlignment(JLabel.CENTER);
-        cmbMeses.setEnabled(false);
 
         cmbAnios.setFont(new Font("Segoe UI", Font.PLAIN, 16));
         cmbAnios.setBounds(x3, 560 - ajusteY, 65, 25);
@@ -287,7 +288,6 @@ public class personajesGUI {
         ((JLabel) cmbAnios.getRenderer()).setHorizontalAlignment(JLabel.CENTER);
         for (int i = 1950; i < 2051; i++)
             cmbAnios.addItem(i);
-        cmbAnios.setEnabled(false);
         cmbAnios.setSelectedItem(2023);
 
         frame.add(cmbTipo);
@@ -300,15 +300,19 @@ public class personajesGUI {
         // Slider
         sdFuerza.setBounds(x2, 310 - ajusteY, 160, 25);
         sdFuerza.setBackground(Color.WHITE);
+        sdFuerza.setValue(0);
 
         sdVelocidad.setBounds(x2, 360 - ajusteY, 160, 25);
         sdVelocidad.setBackground(Color.WHITE);
+        sdVelocidad.setValue(0);
 
         sdInteligencia.setBounds(x2, 410 - ajusteY, 160, 25);
         sdInteligencia.setBackground(Color.WHITE);
+        sdInteligencia.setValue(0);
 
         sdEconomia.setBounds(x2, 460 - ajusteY, 160, 25);
         sdEconomia.setBackground(Color.WHITE);
+        sdEconomia.setValue(0);
 
         frame.add(sdFuerza);
         frame.add(sdVelocidad);
@@ -320,12 +324,6 @@ public class personajesGUI {
         btnFotoTraje.setBackground(Color.lightGray);
         btnFotoTraje.setForeground(Color.darkGray);
         btnFotoTraje.setFont(new Font("Segoe UI", Font.BOLD, 20));
-
-        btnFechaNacimiento.setBounds(x3, 560 - ajusteY, 65, 25);
-        btnFechaNacimiento.setBackground(Color.lightGray);
-        btnFechaNacimiento.setForeground(Color.darkGray);
-        btnFechaNacimiento.setFont(new Font("Segoe UI", Font.BOLD, 20));
-        btnFechaNacimiento.setEnabled(false);
 
         btnFoto.setBounds(x3, 660 - ajusteY, 65, 25);
         btnFoto.setBackground(Color.lightGray);
@@ -344,7 +342,6 @@ public class personajesGUI {
         btnAgregarPersonaje.setFont(new Font("Segoe UI", Font.BOLD, 20));
 
         frame.add(btnFotoTraje);
-        frame.add(btnFechaNacimiento);
         frame.add(btnFoto);
         frame.add(btnRegresar);
         frame.add(btnAgregarPersonaje);
@@ -389,6 +386,9 @@ public class personajesGUI {
                     cmbMeses.setEnabled(true);
                     cmbAnios.setEnabled(true);
                 } else {
+                    txtNombreCompleto.setText("");
+                    txtPaisResidencia.setText("");
+                    txtFoto.setText("");
                     txtNombreCompleto.setEditable(false);
                     btnFechaNacimiento.setEnabled(false);
                     txtPaisResidencia.setEditable(false);
@@ -401,6 +401,30 @@ public class personajesGUI {
             }
         });
 
+        btnFotoTraje.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                String filePath = "";
+                int returnVal = chFotoTraje.showOpenDialog(personajesGUI.this);
+                if (returnVal == JFileChooser.APPROVE_OPTION) {
+                    filePath = chFotoTraje.getSelectedFile().getAbsolutePath();
+                    txtFotoTraje.setText(filePath);
+                }
+            }
+        });
+
+        btnFoto.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                String filePath = "";
+                int returnVal = chFoto.showOpenDialog(personajesGUI.this);
+                if (returnVal == JFileChooser.APPROVE_OPTION) {
+                    filePath = chFoto.getSelectedFile().getAbsolutePath();
+                    txtFoto.setText(filePath);
+                }
+            }
+        });
+
         btnRegresar.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -409,10 +433,59 @@ public class personajesGUI {
             }
         });
 
+        btnAgregarPersonaje.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                // Instanciar variables
+                String tipo = String.valueOf(cmbTipo.getSelectedItem());
+                String pseudonimo = txtPseudonimo.getText();
+                String raza = String.valueOf(cmbRaza.getSelectedItem());
+                String franquicia = String.valueOf(cmbFranquicia.getSelectedItem());
+                String fotoTraje = txtFotoTraje.getText();
+                Double fuerza = (double) sdFuerza.getValue();
+                Double velocidad = (double) sdVelocidad.getValue();
+                Double inteligencia = (double) sdInteligencia.getValue();
+                Double economia = (double) sdEconomia.getValue();
+                Double poderTotal = ((fuerza/100) * (velocidad/100) * (inteligencia/100) * (economia/100));
+                String nombreCompleto = txtNombreCompleto.getText();
+                String fechaNacString = cmbDias.getSelectedItem() + "." + cmbMeses.getSelectedItem() + "." + cmbAnios.getSelectedItem();
+                String pais = txtPaisResidencia.getText();
+                String foto = txtFoto.getText();
 
-    }
+                if (!tipo.equals("") && !pseudonimo.equals("") && !raza.equals("") && !franquicia.equals("") && !fotoTraje.equals("")) {
+                    DateFormat df = new SimpleDateFormat("dd.MM.yyyy");
+                    Date date = null;
+                    try {date = df.parse(fechaNacString);} catch (ParseException ex) {throw new RuntimeException(ex);}
+                    System.out.println("Poder total"+poderTotal);
 
-    private formCompleto() {
+                    // Agregar Heroe
+                    if (String.valueOf(cmbTipo.getSelectedItem()).equals("Heroe")) {
+                        if (!nombreCompleto.equals("") && !pais.equals("") && !foto.equals("")) {
+                            Heroe heroeNuevo = new Heroe(tipo, pseudonimo, raza, franquicia, fotoTraje, fuerza, velocidad, inteligencia, economia, poderTotal, nombreCompleto, date, pais, foto);
+                            heroe.addHeroe(heroeNuevo);
+                            try {heroe.guardar();} catch (IOException ex) {throw new RuntimeException(ex);}
+                            JOptionPane.showMessageDialog(null, "El Heroe se ha guardado con exito.", "Guardado Exitoso", JOptionPane.INFORMATION_MESSAGE);
+
+                        } else {JOptionPane.showMessageDialog(null, "INTENTE DE NUEVO.", "ERROR", JOptionPane.ERROR_MESSAGE);}
+
+                    // Agregar Antiheroe
+                    } else if (String.valueOf(cmbTipo.getSelectedItem()).equals("Antiheroe")) {
+                        Antiheroe antiheroeNuevo = new Antiheroe(tipo, pseudonimo, raza, franquicia, fotoTraje, fuerza, velocidad, inteligencia, economia, poderTotal);
+                        antiheroe.addAntiheroe(antiheroeNuevo);
+                        try {antiheroe.guardar();} catch (IOException ex) {throw new RuntimeException(ex);}
+                        JOptionPane.showMessageDialog(null, "El Antiheroe se ha guardado con exito.", "Guardado Exitoso", JOptionPane.INFORMATION_MESSAGE);
+
+                    // Agregar Villano
+                    } else if (String.valueOf(cmbTipo.getSelectedItem()).equals("Villano")) {
+                        Villano villanoNuevo = new Villano(tipo, pseudonimo, raza, franquicia, fotoTraje, fuerza, velocidad, inteligencia, economia, poderTotal);
+                        villano.addVillano(villanoNuevo);
+                        try {villano.guardar();} catch (IOException ex) {throw new RuntimeException(ex);}
+                        JOptionPane.showMessageDialog(null, "El Villano se ha guardado con exito.", "Guardado Exitoso", JOptionPane.INFORMATION_MESSAGE);
+                    }
+
+                } else {JOptionPane.showMessageDialog(null, "INTENTE DE NUEVO.", "ERROR", JOptionPane.ERROR_MESSAGE);}
+            }
+        });
 
     }
 }
