@@ -21,12 +21,12 @@ public class Main {
 
         // tipo de for para arraylist
         for (Personaje v : villano.getVillanos()) {
-            System.out.println(v);
+            System.out.println(v.getPseudonimo());
         }
 
         // tipo de for normal
-        for (int i = 0; i < villano.getVillanos().size(); i++) {
+        /*for (int i = 0; i < villano.getVillanos().size(); i++) {
             System.out.println(villano.getVillanos().get(i).getPseudonimo());
-        }
+        }*/
     }
 }

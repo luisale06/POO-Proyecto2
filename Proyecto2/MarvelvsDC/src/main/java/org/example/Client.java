@@ -38,7 +38,7 @@ public class Client implements Runnable {
         frame.setTitle("Jugador 2");
         frame.setLayout(null);
         frame.getContentPane().setBackground(Color.white);
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 
         //Labels
         nameLabel = new JLabel();

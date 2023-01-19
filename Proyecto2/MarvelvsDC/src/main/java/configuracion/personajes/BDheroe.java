@@ -38,7 +38,7 @@ public class BDheroe {
 
     public void restaurar() throws IOException{
         Gson gson = new Gson();
-        this.heroes = gson.fromJson(new FileReader(filepath), new TypeToken<List<Ciudad>>(){}.getType());
+        this.heroes = gson.fromJson(new FileReader(filepath), new TypeToken<List<Personaje>>(){}.getType());
     }
 
     public ArrayList<Personaje> getHeroes() {
