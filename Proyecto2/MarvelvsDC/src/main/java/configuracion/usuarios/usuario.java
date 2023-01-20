@@ -1,5 +1,7 @@
 package configuracion.usuarios;
 
+import java.util.Objects;
+
 public class usuario {
     private String nombre;
     private String apellidos;
@@ -53,6 +55,19 @@ public class usuario {
 
     public void setContraseña(String contraseña) {
         this.contraseña = contraseña;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        usuario usuario = (usuario) o;
+        return Objects.equals(nombre, usuario.nombre) && Objects.equals(apellidos, usuario.apellidos) && Objects.equals(username, usuario.username) && Objects.equals(correo, usuario.correo) && Objects.equals(contraseña, usuario.contraseña);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(nombre, apellidos, username, correo, contraseña);
     }
 
     @Override
