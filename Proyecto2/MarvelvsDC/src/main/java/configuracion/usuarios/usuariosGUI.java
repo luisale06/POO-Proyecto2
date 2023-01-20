@@ -7,6 +7,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.IOException;
 
 public class usuariosGUI {
     JFrame frame = new JFrame();
@@ -54,7 +55,11 @@ public class usuariosGUI {
         btnAgregarUsuario.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                agregarUsuarioGUI ventanaAgregarUsuario = new agregarUsuarioGUI();
+                try {
+                    agregarUsuarioGUI ventanaAgregarUsuario = new agregarUsuarioGUI();
+                } catch (IOException ex) {
+                    throw new RuntimeException(ex);
+                }
                 frame.dispose();
             }
         });
@@ -62,7 +67,11 @@ public class usuariosGUI {
         btnEliminarUsuario.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                eliminarUsuarioGUI ventanaEliminarUsuario = new eliminarUsuarioGUI();
+                try {
+                    eliminarUsuarioGUI ventanaEliminarUsuario = new eliminarUsuarioGUI();
+                } catch (IOException ex) {
+                    throw new RuntimeException(ex);
+                }
                 frame.dispose();
             }
         });
@@ -70,7 +79,11 @@ public class usuariosGUI {
         btnEditarUsuario.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                editarUsuarioGUI ventanaEditarUsuario = new editarUsuarioGUI();
+                try {
+                    editarUsuarioGUI ventanaEditarUsuario = new editarUsuarioGUI();
+                } catch (IOException ex) {
+                    throw new RuntimeException(ex);
+                }
                 frame.dispose();
             }
         });

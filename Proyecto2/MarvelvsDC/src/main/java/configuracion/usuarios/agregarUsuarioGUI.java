@@ -26,7 +26,7 @@ public class agregarUsuarioGUI {
 
     BDusuario usuario = new BDusuario();
 
-    public agregarUsuarioGUI(){
+    public agregarUsuarioGUI() throws IOException{
         frame.setSize(550,600);
         frame.setLocation(400,200);
         frame.setTitle("Agregar Usuario");
@@ -36,6 +36,8 @@ public class agregarUsuarioGUI {
         frame.getContentPane().setBackground(Color.white);
         frame.setLocationRelativeTo(null);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+
+        usuario.restaurar();
 
         lblNombre.setFont(new Font("Segoe UI",Font.PLAIN, 20));
         lblNombre.setBackground(Color.white);

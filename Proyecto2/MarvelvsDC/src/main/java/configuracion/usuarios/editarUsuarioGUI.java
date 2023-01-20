@@ -29,16 +29,17 @@ public class editarUsuarioGUI {
     BDusuario usuario = new BDusuario();
     usuario usuarioSeleccionado;
 
-    public editarUsuarioGUI() {
+    public editarUsuarioGUI() throws IOException{
         frame.setSize(550,600);
         frame.setLocation(400,200);
-        frame.setTitle("Agregar Usuario");
+        frame.setTitle("Editar Usuario");
         frame.setVisible(true);
         frame.setResizable(false);
         frame.setLayout(null);
         frame.getContentPane().setBackground(Color.white);
         frame.setLocationRelativeTo(null);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        usuario.restaurar();
 
         lblNombre.setFont(new Font("Segoe UI",Font.PLAIN, 20));
         lblNombre.setBackground(Color.white);

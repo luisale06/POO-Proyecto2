@@ -4,6 +4,13 @@
     "apellidos": "Rojas Lagos",
     "username": "frarojas",
     "correo": "fvrl.cr@gmail.com",
+    "contraseña": "4321"
+  },
+  {
+    "nombre": "Vinicio",
+    "apellidos": "Rojas Lagos",
+    "username": "vinirojas",
+    "correo": "vini@hotmail.com",
     "contraseña": "1234"
   }
 ]

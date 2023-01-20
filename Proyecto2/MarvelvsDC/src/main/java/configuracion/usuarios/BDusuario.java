@@ -29,6 +29,10 @@ public class BDusuario {
         System.out.println(usuarios);
     }
 
+    public void delUsuario(usuario usuarioSeleccionado){
+        usuarios.remove(usuarioSeleccionado);
+        System.out.println(usuarios);
+    }
     public void guardar() throws IOException {
         Gson gson = new GsonBuilder().setPrettyPrinting().create();
         String json = gson.toJson(this.usuarios);
