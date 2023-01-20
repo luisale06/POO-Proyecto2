@@ -24,7 +24,10 @@ public class BDusuario {
             } catch (IOException e) {throw new RuntimeException(e);}}
     }
 
-    public void addUsuario(usuario usuarioNuevo){ usuarios.add(usuarioNuevo); }
+    public void addUsuario(usuario usuarioNuevo){
+        usuarios.add(usuarioNuevo);
+        System.out.println(usuarios);
+    }
 
     public void guardar() throws IOException {
         Gson gson = new GsonBuilder().setPrettyPrinting().create();

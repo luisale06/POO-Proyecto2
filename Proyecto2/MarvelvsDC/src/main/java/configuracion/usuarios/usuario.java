@@ -57,12 +57,6 @@ public class usuario {
 
     @Override
     public String toString() {
-        return "usuarios{" +
-                "nombre='" + nombre + '\'' +
-                ", apellidos='" + apellidos + '\'' +
-                ", username='" + username + '\'' +
-                ", correo='" + correo + '\'' +
-                ", contraseña='" + contraseña + '\'' +
-                '}';
+        return nombre+" / "+apellidos+" / "+username+" / "+correo+" / "+contraseña;
     }
 }

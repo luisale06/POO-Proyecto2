@@ -21,8 +21,8 @@ public class agregarUsuarioGUI {
     JTextField txtCorreo = new JTextField();
     JTextField txtContraseña = new JTextField();
 
-    JButton btnAgregarUsuario = new JButton();
-    JButton btnRegresar = new JButton();
+    JButton btnAgregarUsuario = new JButton("Agregar Usuario");
+    JButton btnRegresar = new JButton("Regresar");
 
     BDusuario usuario = new BDusuario();
 
@@ -49,7 +49,7 @@ public class agregarUsuarioGUI {
         lblApellidos.setBounds(43, 217, 190, 25);
         lblApellidos.setHorizontalAlignment(JLabel.RIGHT);
 
-        lblNombreUsuario.setFont(new Font("Segoe UI", Font.PLAIN, 20));
+        lblNombreUsuario.setFont(new Font("Segoe UI", Font.PLAIN, 19));
         lblNombreUsuario.setBackground(Color.white);
         lblNombreUsuario.setOpaque(true);
         lblNombreUsuario.setBounds(43, 269, 190, 25);
@@ -118,7 +118,7 @@ public class agregarUsuarioGUI {
         btnAgregarUsuario.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                if (!txtNombre.getText().equals("") && !txtApellidos.getText().equals("") && !txtNombreUsuario.getText().equals("")) {
+                if (!txtNombre.getText().equals("") && !txtApellidos.getText().equals("") && !txtNombreUsuario.getText().equals("") && !txtCorreo.getText().equals("") && !txtContraseña.getText().equals("")) {
                     usuario usuarioNuevo = new usuario(txtNombre.getText(), txtApellidos.getText(), txtNombreUsuario.getText(), txtCorreo.getText(), txtContraseña.getText());
 
                     if (!usuario.existeUsuario(usuarioNuevo)) {
